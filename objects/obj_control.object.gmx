@@ -30,6 +30,10 @@ global.pauseSurface = spr_reload;
 paused = false;
 pause_held_down = false;
 
+even_counter = 0
+right_count = 0
+left_count = 0
+
 randomize();
 rain_counter = random(750);
 //if (floor(random_range(0,10)) % 2 == 0) {
@@ -148,10 +152,16 @@ if (keyboard_check(global.pause) &amp;&amp; !pause_held_down){
        draw_sprite_ext(spr_swirl_both, 0, 10, window_get_height() - 115, 4.0, 4.0, 0, c_white, 1) 
     }
     else if (left &gt; 0){
-        draw_sprite_ext(spr_swirl_left, 0, 10, window_get_height() - 115, 4.0, 4.0, 0, c_white, 1)
+        draw_sprite_ext(spr_cup_left, left_count, 20, window_get_height() - 200, 4.0, 4.0, 0, c_white, 1)
+        if (even_counter % 4 == 0) left_count++
+        if (left_count &gt; 23) left_count = 0;
+        even_counter++
     }
     else if (right &gt; 0){
-        draw_sprite_ext(spr_swirl_right, 0, 10, window_get_height() - 115, 4.0, 4.0, 0, c_white, 1)
+        draw_sprite_ext(spr_cup_right, right_count, 20, window_get_height() - 200, 4.0, 4.0, 0, c_white, 1)
+        if (even_counter % 4 == 0) right_count++
+        if (right_count &gt; 2) right_count = 0;
+        even_counter++
     }
     else {
         draw_sprite_ext(spr_cup, 0, 20, window_get_height() - 200, 4.0, 4.0, 0, c_white, 1)

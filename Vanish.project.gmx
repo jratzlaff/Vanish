@@ -251,6 +251,7 @@
       <room>rooms\rm_level_select</room>
     </rooms>
     <room>rooms\room10</room>
+    <room>rooms\room15</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

@@ -54,25 +54,25 @@ enum player_states {
 player_state = player_states.stationary;
 state_changed = true;
 
-move_speed = 2.5;
-air_move_speed = .5;
-max_move_speed = 10;
+frict = .45;//changes the dampening when in contact with the ground
+move_speed = 4;
+air_move_speed = .75;
+max_air_move_speed = 5.5;
+max_move_speed = 6.5/frict;
 max_absolute_speed = 100;
 throw_speed = 30;//???
 throw_momentum_percent = .5;
 MAX_AMMO = 5;
 ammo = MAX_AMMO;
-in_air = false;
 wall_friction = false;
-jump_speed = 9;
-double_jump_speed = 9;
+jump_speed = 7;
+double_jump_speed = 7;
 jump_time = 12;
 steps = 0;
 wall_jump_vertical = 1.2;
 wall_jump_horizontal = .9;
-dampening = .99;//smaller is more dampening
-frict = .65;//changes the dampening when in contact with the ground
-wfrict = .7;//changes the dampening when holding against a wall
+dampening = 1;//smaller is more dampening
+wfrict = .65;//changes the dampening when holding against a wall
 minimum_roll_speed = 1;
 min_running_speed = .2;
 height=36;
@@ -169,7 +169,7 @@ if(abs(vel_y) &gt; max_absolute_speed)
           <argument>
             <kind>1</kind>
             <string>///Constant Keypresses
-
+if(player_state !=player_states.death){
 if(mouse_check_button_pressed(global.throw))
 {
     if (ammo &gt; 0){
@@ -217,7 +217,7 @@ if (keyboard_check(global.right_portal)){
         }
     }
 }
-
+}
 </string>
           </argument>
         </arguments>
@@ -244,6 +244,7 @@ if(state_changed){
     state_changed = false;
     sprite_index = spr_standing;
     image_speed = .2;
+    vel_x = 0;
 }
 
 if( keyboard_check(global.left)){
@@ -302,21 +303,25 @@ if(state_changed){
     state_changed = false;
     image_speed = .3;
 }
+
 vel_x*=frict;
 if( keyboard_check(global.left)){
     if(! keyboard_check(global.right)){
-        vel_x-=move_speed;        
+        if(vel_x &gt; -1*max_move_speed){
+            vel_x-=move_speed;
+        }
         image_xscale = -1;
     }
 }
 
 if( keyboard_check(global.right)){
     if(! keyboard_check(global.left)){
-        vel_x+=move_speed;
+        if(vel_x &lt; max_move_speed){
+            vel_x+=move_speed;
+        }
         image_xscale = 1;
     }
 }
-
 if (!check_collision(x,y+1, object_index)){
     player_state = player_states.falling;
     state_changed = true;
@@ -329,7 +334,6 @@ if (keyboard_check_pressed_any(global.jump)){
 
 if(!state_changed){
     if(abs(vel_x) &lt; min_running_speed){
-        vel_x = 0;
         state_changed = true;
         player_state = player_states.stationary;
     }
@@ -366,14 +370,20 @@ if(player_state = player_states.jumping and player_state != player_states.death)
     }
     if( keyboard_check(global.left)){
         if(! keyboard_check(global.right)){
-            vel_x-=air_move_speed;   
-            image_xscale = -1;     
+               
+            if(vel_x &gt; -1*max_air_move_speed){
+                vel_x-=air_move_speed;
+            }
+            image_xscale = -1;
         }
     }
 
     if( keyboard_check(global.right)){
         if(! keyboard_check(global.left)){
-            vel_x+=air_move_speed;
+            
+            if(vel_x &lt; max_air_move_speed){
+                vel_x+=air_move_speed;
+            }
             image_xscale = 1;
         }
     }
@@ -424,12 +434,21 @@ if(player_state == player_states.falling and player_state != player_states.death
     }
     if( keyboard_check(global.left)){
         if(! keyboard_check(global.right)){
-            vel_x-=air_move_speed;        
+               
+            if(vel_x &gt; -1*max_air_move_speed){
+                vel_x-=air_move_speed;
+            }
+            image_xscale = -1;
         }
     }
+
     if( keyboard_check(global.right)){
         if(! keyboard_check(global.left)){
-            vel_x+=air_move_speed;
+            
+            if(vel_x &lt; max_air_move_speed){
+                vel_x+=air_move_speed;
+            }
+            image_xscale = 1;
         }
     }
 }
@@ -466,9 +485,10 @@ if(player_state == player_states.landing and player_state != player_states.death
             sprite_index = spr_landing;
             image_speed = .6;
             state_changed = false;
+            vel_x*=frict;
         }
     }else {
-        vel_x*=.5;
+        vel_x*=frict;
     }
     
 }
@@ -660,9 +680,9 @@ if(player_state == player_states.death){
         //if we want blood we can use particles
         //effect_create_above(ef_firework, x, y, 0, c_red);
         sprite_index = spr_dying;
-        vel_x /= 2;
         state_changed=false;
     }
+    vel_x /= 2;
 
 }
 </string>
@@ -686,7 +706,7 @@ if(player_state == player_states.death){
           <argument>
             <kind>1</kind>
             <string>///Update Position
-
+show_debug_message(string(player_state));
 result = move(object_index, vel_x,vel_y);
 vert_col = result % 2 == 1;
 horz_col = (result div 2) % 2 == 1;
@@ -764,8 +784,13 @@ with(obj_portal_left){
           <argument>
             <kind>1</kind>
             <string>if (player_state == player_states.landing){
-    player_state = player_states.stationary;
-    state_changed = true;
+    if(!keyboard_check_pressed(global.left) and !keyboard_check_pressed(global.right)){
+        player_state = player_states.stationary;
+        state_changed = true;
+    }else{
+        player_state = player_states.running;
+        state_changed = true;
+    }
 }
 if (player_state == player_states.rolling){
     player_state = player_states.running;

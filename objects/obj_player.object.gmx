@@ -3,7 +3,7 @@
   <spriteName>spr_standing</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>1</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>spr_hitbox_player</maskName>
@@ -55,7 +55,7 @@ player_state = player_states.stationary;
 state_changed = true;
 
 frict = .45;//changes the dampening when in contact with the ground
-move_speed = 4;
+move_speed = 4;//was 4
 air_move_speed = .75;
 max_air_move_speed = 5.5;
 max_move_speed = 6.5/frict;
@@ -706,7 +706,6 @@ if(player_state == player_states.death){
           <argument>
             <kind>1</kind>
             <string>///Update Position
-show_debug_message(string(player_state));
 result = move(object_index, vel_x,vel_y);
 vert_col = result % 2 == 1;
 horz_col = (result div 2) % 2 == 1;

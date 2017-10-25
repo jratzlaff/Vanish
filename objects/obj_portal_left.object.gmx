@@ -6,7 +6,7 @@
   <depth>-10</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
-  <maskName>spr_hitbox_flat_portal</maskName>
+  <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
       <action>
@@ -114,7 +114,7 @@ draw_set_blend_mode(bm_normal);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>teleport(self, obj_portal_right, obj_player);
+            <string>//teleport(self, obj_portal_right, obj_player);
 /*if (instance_number(obj_portal_right) &gt; 0 &amp;&amp; cooldown == 0){
     cooldown = COOLDOWN_TIMER
     var new_x;

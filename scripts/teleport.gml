@@ -1,6 +1,7 @@
 var p1 = argument[0];
 var p2 = argument[1];
 var obj = argument[2];
+show_debug_message("TELEPORT");
 var COOLDOWN = 10;
 if(instance_number(p2) > 0 && p1.cooldown == 0) {
     p1.cooldown = COOLDOWN;

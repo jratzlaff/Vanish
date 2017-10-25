@@ -150,6 +150,8 @@
     <script>scripts\teleport.gml</script>
     <script>scripts\left_right_movement.gml</script>
     <script>scripts\move.gml</script>
+    <script>scripts\check_horizontal_portal.gml</script>
+    <script>scripts\check_vertical_portal.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader_silhouette.shader</shader>

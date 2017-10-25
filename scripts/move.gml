@@ -30,7 +30,7 @@ with(obj){
     
     
     if(check_collision(x,y+vy, obj)){
-        portal = check_horizontal_portal(obj);
+        portal = check_vertical_portal(obj);
         if(portal==-1){
             var yn =y;
             while(!check_collision(x,yn+sign(vy), object_index))

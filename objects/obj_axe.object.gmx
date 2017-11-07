@@ -57,29 +57,46 @@ can_jump = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Gravity
-vel_x+=gravity_x;
-vel_y+=gravity_y;
+            <string>
 
 //Dampening
 if(abs(vel_x) &lt; 1)
     vel_x=0;
-vel_x*=dampening;
+
 //if on ground apply friction
-if (check_collision(x, y+1, object_index))
+if (check_collision(x, y+1, object_index)){
     vel_x*=frict;
-vel_y*=dampening;
-
-
-
-//Update rotation
-
-if(!check_collision(x,y+1,object_index)) 
+    vel_y*=frict;
+}else{
+    //Gravity
+    vel_x+=gravity_x;
+    vel_y+=gravity_y;    
+    //Update rotation
     image_angle+=-1*sign(vel_x)*spin_speed;
+    vel_x*=dampening;
+    vel_y*=dampening;
+}
+
+
+
 
 
 
 //Update position
+result = move(id, vel_x, vel_y);
+vert_col = result % 2 == 1;
+horz_col = (result div 2) % 2 == 1;
+if(horz_col){
+    vel_x = 0;
+}
+if(vert_col){
+    vel_y = 0;
+}
+
+if (x &lt; 0 || x &gt; room_width || y &lt; 0 || y &gt; room_height)
+    instance_destroy();
+    
+/**
 if(check_collision(x+vel_x,y,object_index))
 {
     var xn = x;
@@ -108,9 +125,7 @@ if(check_collision(x,y+vel_y,object_index))
 }
 else
     y+=vel_y;
-
-if (x &lt; 0 || x &gt; room_width || y &lt; 0 || y &gt; room_height)
-    instance_destroy();
+**/
 </string>
           </argument>
         </arguments>

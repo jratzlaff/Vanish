@@ -1,15 +1,20 @@
 var obj = argument[0];
 var vx = argument[1];
 var vy = argument[2];
-
+if(vx==0 and vy==0)
+    return 0;
+show_debug_message("moving");
+show_debug_message(string(vx)+","+string(vy));
+show_debug_message(string(obj));
 vertical_collision = 0;
 horizontal_collision = 0;
 with(obj){
+    show_debug_message(string(object_index)+","+string(id))
     if(check_collision(x+vx, y, obj)){
         portal = check_horizontal_portal(obj,vx);
         if(portal == -1){
             var xn = x;
-            while(!check_collision(xn+sign(vx),y, object_index))
+            while(!check_collision(xn+sign(vx),y, obj))
             {   
                 xn += sign(vx);
             }
@@ -33,7 +38,7 @@ with(obj){
         portal = check_vertical_portal(obj,vy);
         if(portal==-1){
             var yn =y;
-            while(!check_collision(x,yn+sign(vy), object_index))
+            while(!check_collision(x,yn+sign(vy), obj))
             {
                 yn += sign(vy);
             }

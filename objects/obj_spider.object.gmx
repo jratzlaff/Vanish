@@ -73,11 +73,11 @@ var margin = sprite_height / 2 + 1;
 var x_margin = (sprite_height / 2) - 1;
 
 // Check to see where the spider is attached to.
-if (check_collision(x - x_margin * sign(vel_x),y + margin,object_index)){
+if (check_collision(x - x_margin * sign(vel_x),y + margin,id)){
     // Top
     
     // Check if there is a block in the way
-    if (check_collision(x + x_margin * sign(vel_x) + 2, y, object_index)){
+    if (check_collision(x + x_margin * sign(vel_x) + 2, y, id)){
         vel_y = -abs(vel_y);
         y += vel_y;  
     } else {
@@ -90,11 +90,11 @@ if (check_collision(x - x_margin * sign(vel_x),y + margin,object_index)){
         }
         x += vel_x;
     }
-} else if (check_collision(x - x_margin * sign(vel_x),y - margin,object_index)){
+} else if (check_collision(x - x_margin * sign(vel_x),y - margin,id)){
     // Bottom
     
     // Check if there is a block in the way
-    if (check_collision(x + x_margin * sign(vel_x) + 2, y, object_index)){
+    if (check_collision(x + x_margin * sign(vel_x) + 2, y, id)){
         vel_y = abs(vel_y);
         /*if (vel_x &gt; 0){
             image_angle = 45;
@@ -112,7 +112,7 @@ if (check_collision(x - x_margin * sign(vel_x),y + margin,object_index)){
         }
         x += vel_x;
     }
-} else if (check_collision(x + margin,y - x_margin * sign(vel_y),object_index)){
+} else if (check_collision(x + margin,y - x_margin * sign(vel_y),id)){
     // Left
     last_state = 2;
     image_angle = 90;
@@ -122,7 +122,7 @@ if (check_collision(x - x_margin * sign(vel_x),y + margin,object_index)){
         image_yscale = 1;
     }
     y += vel_y;
-} else if (check_collision(x - margin,y - x_margin * sign(vel_y),object_index)){
+} else if (check_collision(x - margin,y - x_margin * sign(vel_y),id)){
     // Right
     last_state = 3;
     image_angle = 270;
@@ -135,8 +135,8 @@ if (check_collision(x - x_margin * sign(vel_x),y + margin,object_index)){
 } else {
 
     // No blocks, so did he just walk away from one or was it destorye? *cough buttons*
-    if (last_state != -1 &amp;&amp; !check_collision(x + margin,y + margin,object_index) &amp;&amp; !check_collision(x - margin,y - margin,object_index)
-        &amp;&amp; !check_collision(x - margin,y + margin,object_index) &amp;&amp; !check_collision(x + margin,y - margin,object_index)){    
+    if (last_state != -1 &amp;&amp; !check_collision(x + margin,y + margin,id) &amp;&amp; !check_collision(x - margin,y - margin,id)
+        &amp;&amp; !check_collision(x - margin,y + margin,id) &amp;&amp; !check_collision(x + margin,y - margin,id)){    
         // Oh, there is nothign around, guess I'll do gravity
         last_state = -1;
         vel_x = abs(vel_x);
@@ -153,7 +153,7 @@ if (check_collision(x - x_margin * sign(vel_x),y + margin,object_index)){
             image_angle = 135;
         }
         y += vel_y;
-        while (!check_collision(x + margin,y,object_index) &amp;&amp; !check_collision(x - margin,y,object_index)){
+        while (!check_collision(x + margin,y,id) &amp;&amp; !check_collision(x - margin,y,id)){
             y += vel_y;
         }
     } else if (last_state == 2 || last_state == 3){
@@ -166,15 +166,15 @@ if (check_collision(x - x_margin * sign(vel_x),y + margin,object_index)){
         }
         x += vel_x;
         image_angle -= 45;
-        while (!check_collision(x,y + margin,object_index) &amp;&amp; !check_collision(x,y - margin,object_index)){
+        while (!check_collision(x,y + margin,id) &amp;&amp; !check_collision(x,y - margin,id)){
             x += vel_x;
         }
     } else {
     
         // Well, there are no blocks around so I guess do gravity???
         // If there is ground...
-        if (check_collision(x - x_margin * sign(vel_x),y + vel_y_grav,object_index)){
-            while (!check_collision(x - x_margin * sign(vel_x),y + vel_y_grav,object_index)){
+        if (check_collision(x - x_margin * sign(vel_x),y + vel_y_grav,id)){
+            while (!check_collision(x - x_margin * sign(vel_x),y + vel_y_grav,id)){
                 y++;
             }
         } else {

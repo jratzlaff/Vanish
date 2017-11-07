@@ -705,7 +705,7 @@ if(player_state == player_states.death){
           <argument>
             <kind>1</kind>
             <string>///Update Position
-result = move(object_index, vel_x,vel_y);
+result = move(id, vel_x,vel_y);
 vert_col = result % 2 == 1;
 horz_col = (result div 2) % 2 == 1;
 if (horz_col){

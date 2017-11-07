@@ -74,7 +74,7 @@ if(abs(vel_x) &lt; .1)
     vel_x=0;
 vel_x*=dampening;
 //if on ground apply friction
-if (check_collision(x, y+1, object_index))
+if (check_collision(x, y+1, id))
     vel_x*=frict;
 vel_y*=dampening;
 
@@ -82,7 +82,7 @@ vel_y*=dampening;
 
 //Update rotation
 
-if(!check_collision(x,y+1,object_index)){
+if(!check_collision(x,y+1,id)){
     image_angle = radtodeg(arctan(vel_y/-vel_x));
     if (vel_x &gt; 0){
         image_angle += 180;
@@ -93,9 +93,9 @@ if(!check_collision(x,y+1,object_index)){
 if (!stuck){
 //if (1){
     //Update position
-    if(check_collision(x+vel_x,y,object_index))
+    if(check_collision(x+vel_x,y,id))
     {
-        while(!check_collision(x+sign(vel_x),y,object_index))
+        while(!check_collision(x+sign(vel_x),y,id))
         {
             x += sign(vel_x);
         }
@@ -105,9 +105,9 @@ if (!stuck){
     }
     
     
-    if(check_collision(x,y+vel_y,object_index))
+    if(check_collision(x,y+vel_y,id))
     {
-        while(!check_collision(x,y+sign(vel_y),object_index))
+        while(!check_collision(x,y+sign(vel_y),id))
         {
             y += sign(vel_y);
         }

@@ -90,9 +90,9 @@ x_vel*=dampening;
 y_vel*=dampening;
 
 //if(place_meeting(x+x_vel,y,obj_wall) || place_meeting(x+x_vel,y,obj_skull))
-if(check_collision(x+x_vel,y,object_index))
+if(check_collision(x+x_vel,y,id))
 {
-    while(!check_collision(x+sign(x_vel),y,object_index))
+    while(!check_collision(x+sign(x_vel),y,id))
     {
         x += sign(x_vel);
     }
@@ -101,9 +101,9 @@ if(check_collision(x+x_vel,y,object_index))
 x+=x_vel;
 
 
-if(check_collision(x,y+y_vel,object_index))
+if(check_collision(x,y+y_vel,id))
 {
-    while(!check_collision(x,y+sign(y_vel),object_index))
+    while(!check_collision(x,y+sign(y_vel),id))
     {
         y += sign(y_vel);
     }

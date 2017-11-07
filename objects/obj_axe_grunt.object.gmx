@@ -85,24 +85,24 @@ if (instance_exists(box)){
 }
 
 // Let the dude walk on platforms
-if (!check_collision(x - 16,y + 26,object_index) || !check_collision(x + 16,y + 26,object_index)){
+if (!check_collision(x - 16,y + 26,id) || !check_collision(x + 16,y + 26,id)){
     vel_x *= -1;
     image_xscale *= -1;
 }
 
 // Change direction 
-if (check_collision(x + 1,y-10, object_index) || check_collision(x - 1, y-10, object_index)){
+if (check_collision(x + 1,y-10, id) || check_collision(x - 1, y-10, id)){
     vel_x *= -1;
     image_xscale *= -1;
 }
 
 // Do Gravity
-if (!check_collision(x,y+1, object_index)){
+if (!check_collision(x,y+1, id)){
     vel_y += gravity_y;
     y = y + vel_y;
 } else {
     if (vel_y &gt; 0){
-        while (check_collision(x,y,object_index)){
+        while (check_collision(x,y,id)){
             y--;
         }
     }

@@ -237,9 +237,9 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\first_room</room>
+    <room>rooms\wall_jump_testing</room>
     <room>rooms\demo_room</room>
     <room>rooms\portal_test_room</room>
-    <room>rooms\wall_jump_testing</room>
     <room>rooms\room1</room>
     <room>rooms\eye_see_you</room>
     <room>rooms\room7</room>

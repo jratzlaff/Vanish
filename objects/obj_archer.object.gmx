@@ -163,7 +163,7 @@ if (match){
     }*/
     
     // Change direction 
-    if (check_collision(x + vel_x,y, object_index) || check_collision(x - vel_x, y, object_index)){
+    if (check_collision(x + vel_x,y, id) || check_collision(x - vel_x, y, id)){
         vel_x *= -1;
         image_xscale *= -1;
     }
@@ -177,12 +177,12 @@ if (match){
 }
 
 // Do Gravity
-if (!check_collision(x,y+1, object_index)){
+if (!check_collision(x,y+1, id)){
     vel_y += gravity_y;
     y = y + vel_y;
 } else {
     if (vel_y &gt; 0){
-        while (check_collision(x,y,object_index)){
+        while (check_collision(x,y,id)){
             y--;
         }
     }

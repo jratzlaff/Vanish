@@ -5,6 +5,9 @@ n[1] = indices(i + 1, j); // get the neighbor to the right of us
 n[2] = indices(i, j + 1); // get the neighbor below us
 n[3] = indices(i - 1, j); // get the neighbor to the left of us
 
+//trying to make left and right neighbors more common
+n[4] = indices(i + 1, j); // get the neighbor to the right of us
+n[5] = indices(i - 1, j); // get the neighbor to the left of us
 for (var c = 0; c < array_length_1d(n); c++) {
     if (n[c] != undefined) {
         if (!n[c].visited) {

@@ -51,7 +51,7 @@
             <string>light_size = 96;
 draw_set_blend_mode(bm_subtract);
 surface_set_target(light);
-draw_ellipse_color(x - light_size / 2 - view_xview, y - light_size / 2 - view_yview, x + light_size / 2 - view_xview, y + light_size / 2 - view_yview, c_red, c_orange, false);
+draw_ellipse_color(x - light_size / 2 - view_xview, y - light_size / 2 - view_yview, x + light_size / 2 - view_xview, y + light_size / 2 - view_yview, c_red, c_black, false);
 surface_reset_target();
 draw_set_blend_mode(bm_normal);
 </string>

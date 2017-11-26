@@ -30,15 +30,17 @@
 width = room_width; //normally room_width and room_height
 height = 800;
 
-w = 32*4; //a cell is like a big tile that holds walls
+w = 32*4; //a cell is like a big tile that holds walls, a good one is 32*4
 
 cols = floor(width / w); // columns
 rows = floor(height / w); // rows
 
+//cerate the player and make the camera on him
 instance_create(0, 0, obj_control)
-instance_create(64, 64, obj_player);
+instance_create(64, room_height - (256 + 128), obj_player);
 view_visible[0] = true
-// cycle through all columns and rows to fill the board will cells
+
+// cycle through all columns and rows to fill the maze will cells
 for (var i = 0; i &lt; cols; i++) {
     for (var j = 0; j &lt; rows; j++) {
         obj = instance_create(i * w, j * w, obj_cell);

@@ -54,7 +54,8 @@ visited = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (walls[0]) { // draw top wall
+            <string>
+if (walls[0]) { // draw top wall
     bat = floor(random_range(0, w / 32))
     for (i = 0; i &lt; (w / 32); i++) {
         instance_create(x + i*32, y, obj_wall);
@@ -65,24 +66,35 @@ visited = false;
 }
 
 if (walls[1]) { // draw right wall
+//no_wall is trying to make holes in walls to give a little more variety
     for (i = 0; i &lt; (w / 32); i++) {
-        instance_create(x + w - 32, y + i*32, obj_wall);
+        //no_wall = floor(random_range(1,6))
+        //if(no_wall % 2 == 1){
+            instance_create(x + w - 32, y + i*32, obj_wall);
+        //}
     }
 }
 
 if (walls[2]) { // draw bottom wall
-    window = floor(random_range(2, w / 32 - 2))
+    window = -1
+    if (irandom(2) % 2 == 0){
+        window = floor(random_range(2, w / 32 - 2))
+    }
     for (i = 0; i &lt; (w / 32); i++) {
         instance_create(x + i*32, y + w - 32, obj_wall);
         if (i == window){
-            instance_create(x + i*32, y, obj_window);
+            instance_create(x + i*32, y + w - 96, obj_window);
+            instance_create(x + i*32 - 10, y + w - 80, obj_candles);
         }
     }
 }
 
 if (walls[3]) { // draw left wall
     for (i = 0; i &lt; (w / 32); i++) {
-        instance_create(x, y + i*32, obj_wall);
+        //no_wall = floor(random_range(1,6))
+        //if(no_wall % 2 == 1){
+            instance_create(x, y + i*32, obj_wall);
+        //}
     }
 }
 

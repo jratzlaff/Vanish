@@ -80,11 +80,7 @@ if path_position = 1 {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (obj_window.sprite_index == spr_window_lightning &amp;&amp; obj_window.image_index &gt;= obj_window.image_number - 3) {
-    shader_set(shader_white);
-}
-draw_self();
-shader_reset();
+            <string>do_lightning();
 </string>
           </argument>
         </arguments>

@@ -102,6 +102,7 @@
       <sprite>sprites\spr_level_display</sprite>
       <sprite>sprites\spr_cup_left</sprite>
       <sprite>sprites\spr_cup_right</sprite>
+      <sprite>sprites\spr_quit_button</sprite>
     </sprites>
     <sprites name="Boss">
       <sprite>sprites\spr_fire_wall</sprite>
@@ -152,6 +153,11 @@
     <script>scripts\move.gml</script>
     <script>scripts\check_horizontal_portal.gml</script>
     <script>scripts\check_vertical_portal.gml</script>
+    <scripts name="maze">
+      <script>scripts\checkNeighbors.gml</script>
+      <script>scripts\indices.gml</script>
+      <script>scripts\removeWalls.gml</script>
+    </scripts>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader_silhouette.shader</shader>
@@ -217,11 +223,14 @@
       <object>objects\obj_control</object>
       <object>objects\obj_reload</object>
       <object>objects\obj_button</object>
+      <object>objects\obj_quit</object>
       <object>objects\obj_pause</object>
       <object>objects\obj_boss_control</object>
       <object>objects\obj_continue</object>
       <object>objects\obj_title</object>
       <object>objects\obj_level_display</object>
+      <object>objects\obj_maze</object>
+      <object>objects\obj_cell</object>
     </objects>
     <objects name="Boss">
       <object>objects\obj_fire_wall</object>
@@ -236,6 +245,7 @@
     </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\random_room</room>
     <room>rooms\first_room</room>
     <room>rooms\wall_jump_testing</room>
     <room>rooms\demo_room</room>

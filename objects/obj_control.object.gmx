@@ -30,6 +30,7 @@ globalvar light;
 light = surface_create(view_wview, view_hview);
 
 //Pause
+//window_set_fullscreen(true);
 global.pause = vk_escape;
 global.pauseSurface = spr_reload;
 paused = false;
@@ -117,6 +118,11 @@ if (keyboard_check(global.pause) &amp;&amp; !pause_held_down){
 } else {
     if (!keyboard_check(global.pause))
         pause_held_down = false;
+}
+
+// reset the room by pressing the "R" key
+if (keyboard_check_pressed(ord("R"))) {
+    room_restart();
 }
 </string>
           </argument>

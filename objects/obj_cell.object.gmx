@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>1000</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,19 +25,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x_pos = surface_get_width(application_surface) / 2;
-y_pos = surface_get_height(application_surface) / 2;
+            <string>var w, cols, rows, i, j;
 
-button = instance_create(view_xview + view_wview / 2, view_yview + view_hview / 2 , obj_button);
-button.sprite_index = spr_back_button;
-button.gotoRoom     = menu;
-button.depth = -1000;
+for (var i = 0; i &lt; 4; i++) {
+    walls[i] = true;
+}
 
-quitButton = instance_create(view_xview + view_wview / 2, view_yview + view_hview / 2 - 50, obj_quit);
-button.depth = -1000;
-
-
-
+visited = false;
 </string>
           </argument>
         </arguments>
@@ -60,34 +54,44 @@ button.depth = -1000;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>with(button)
-    instance_destroy();
-with(quitButton)
-    instance_destroy();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="64">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>draw_sprite(global.pauseSurface, sprite_index, 0, 0);
-draw_sprite(spr_back_button, sprite_index, x_pos, y_pos);
+            <string>if (walls[0]) { // draw top wall
+    bat = floor(random_range(0, w / 32))
+    for (i = 0; i &lt; (w / 32); i++) {
+        instance_create(x + i*32, y, obj_wall);
+        if (i == bat){
+            instance_create(x + i*32, y + 32, obj_bat);
+        }
+    }
+}
+
+if (walls[1]) { // draw right wall
+    for (i = 0; i &lt; (w / 32); i++) {
+        instance_create(x + w - 32, y + i*32, obj_wall);
+    }
+}
+
+if (walls[2]) { // draw bottom wall
+    window = floor(random_range(2, w / 32 - 2))
+    for (i = 0; i &lt; (w / 32); i++) {
+        instance_create(x + i*32, y + w - 32, obj_wall);
+        if (i == window){
+            instance_create(x + i*32, y, obj_window);
+        }
+    }
+}
+
+if (walls[3]) { // draw left wall
+    for (i = 0; i &lt; (w / 32); i++) {
+        instance_create(x, y + i*32, obj_wall);
+    }
+}
+
+if(instance_exists(obj_control)){
+    with(obj_control){
+        instance_destroy()
+    }
+}
+instance_create(0,0,obj_control)
 </string>
           </argument>
         </arguments>

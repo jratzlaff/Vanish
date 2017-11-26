@@ -484,10 +484,10 @@ if(player_state == player_states.landing and player_state != player_states.death
             sprite_index = spr_landing;
             image_speed = .6;
             state_changed = false;
-            vel_x*=frict;
+            //vel_x*=frict;
         }
     }else {
-        vel_x*=frict;
+        //vel_x*=frict;
     }
     
 }

@@ -51,6 +51,12 @@ if (instance_number(obj_window) &gt; 0){
     }
 }
 
+if(global.room_finished){
+    ds_list_shuffle(global.ends); // shuffle the list of ends
+    var n = ds_list_find_value(global.ends, 0); // grab the top end   
+    instance_create(n[0] + 64, n[1] + 64, obj_chest)
+    show_debug_message("I MADE A CHEST AT " + (n[0] + 64) + " " + (n[1]) + 64)
+}
 
 </string>
           </argument>
@@ -77,8 +83,8 @@ if (instance_number(obj_window) &gt; 0){
             <string>//Lighting
 surface_set_target(light);
 //HEX is BGR for god know's why
-draw_set_color($aaaaaa);
-draw_rectangle(0, 0, view_wview, view_hview, false);
+draw_set_color($dddddd);
+//draw_rectangle(0, 0, view_wview, view_hview, false);
 surface_reset_target();
 
 

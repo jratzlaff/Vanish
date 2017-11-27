@@ -88,6 +88,7 @@
       <sprite>sprites\spr_bone_pile</sprite>
       <sprite>sprites\spr_shield_pickup</sprite>
       <sprite>sprites\spr_aspen</sprite>
+      <sprite>sprites\spr_chest_gold</sprite>
     </sprites>
     <sprites name="Control">
       <sprite>sprites\spr_reload</sprite>
@@ -217,6 +218,7 @@
       <object>objects\obj_bone_pile</object>
       <object>objects\obj_shield_pickup</object>
       <object>objects\obj_aspen</object>
+      <object>objects\obj_chest</object>
     </objects>
     <objects name="Control">
       <object>objects\obj_fade</object>

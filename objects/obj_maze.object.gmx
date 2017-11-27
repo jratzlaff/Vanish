@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>random_set_seed(randomize());
+global.room_finished = false;
 
 width = room_width; //normally room_width and room_height
 height = 800;
@@ -106,6 +107,7 @@ until(ds_list_empty(stack)); // the stack is empty; all cells have been visited
 with (obj_cell){
     instance_destroy();
 }
+global.room_finished = true;
 instance_destroy();
 </string>
           </argument>

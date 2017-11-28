@@ -89,6 +89,7 @@
       <sprite>sprites\spr_shield_pickup</sprite>
       <sprite>sprites\spr_aspen</sprite>
       <sprite>sprites\spr_chest_gold</sprite>
+      <sprite>sprites\spr_light_block</sprite>
     </sprites>
     <sprites name="Control">
       <sprite>sprites\spr_reload</sprite>
@@ -219,6 +220,7 @@
       <object>objects\obj_shield_pickup</object>
       <object>objects\obj_aspen</object>
       <object>objects\obj_chest</object>
+      <object>objects\obj_light_block</object>
     </objects>
     <objects name="Control">
       <object>objects\obj_fade</object>

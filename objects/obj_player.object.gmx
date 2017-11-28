@@ -109,9 +109,146 @@ vel_y=0;
             <string>light_size = 192;
 draw_set_blend_mode(bm_subtract);
 surface_set_target(light);
-draw_ellipse_color(x - light_size / 2 - view_xview, y - light_size / 2 - view_yview, x + light_size / 2 - view_xview, y + light_size / 2 - view_yview, c_purple, c_black, false);
+//draw_ellipse_color(x - light_size / 2 - view_xview, y - light_size / 2 - view_yview, x + light_size / 2 - view_xview, y + light_size / 2 - view_yview, c_purple, c_black, false);
 surface_reset_target();
 draw_set_blend_mode(bm_normal);
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Grid light
+global.list = ds_queue_create()
+obj = instance_create(x,y,obj_light_block)
+with(obj){
+    light_level = 10;
+    reference_x = 5;
+    reference_y = 5;
+    deleteEh = true;
+}
+ds_queue_enqueue(global.list, obj)
+
+var block_size = 12
+var decay_rate = 1.5
+
+while(!ds_queue_empty(global.list)){
+    element = ds_queue_dequeue(global.list)
+    with(element){
+        if(!place_meeting(x,y,obj_light_block) &amp;&amp; light_level &gt; 1){
+                global.refx = reference_x
+                global.refy = reference_y
+                var parent_light = light_level
+                obj = instance_create(x-block_size, y, obj_light_block)
+                var bool = false;
+                with(obj){
+                    deleteEh = true
+                    reference_x = global.refx-1
+                    reference_y = global.refy
+                    light_level = parent_light/decay_rate
+                    bool = place_meeting(x,y,obj_wall)
+                }
+                if(!bool)
+                    ds_queue_enqueue(global.list, obj)
+                var bool = false;
+                obj = instance_create(x+block_size, y, obj_light_block)
+                with(obj){
+                    deleteEh = true
+                    reference_x = global.refx+1
+                    reference_y = global.refy
+                    light_level = parent_light/decay_rate
+                    bool = place_meeting(x,y,obj_wall)
+                }
+                if(!bool)
+                    ds_queue_enqueue(global.list, obj)
+                var bool = false;
+                obj = instance_create(x, y-block_size, obj_light_block)
+                with(obj){
+                    deleteEh = true
+                    reference_x = global.refx
+                    reference_y = global.refy-1
+                    light_level = parent_light/decay_rate
+                    bool = place_meeting(x,y,obj_wall)
+                }
+                if(!bool)
+                    ds_queue_enqueue(global.list, obj)
+                var bool = false;
+                obj = instance_create(x, y+block_size, obj_light_block)
+                with(obj){
+                    deleteEh = true
+                    reference_x = global.refx
+                    reference_y = global.refy+1
+                    light_level = parent_light/decay_rate
+                    bool = place_meeting(x,y,obj_wall)
+                }
+                if(!bool)
+                    ds_queue_enqueue(global.list, obj)
+                
+                
+                obj = instance_create(x-block_size, y-block_size, obj_light_block)
+                var bool = false;
+                with(obj){
+                    deleteEh = true
+                    reference_x = global.refx-1
+                    reference_y = global.refy-1
+                    light_level = parent_light/decay_rate
+                    bool = place_meeting(x,y,obj_wall)
+                }
+                if(!bool)
+                    ds_queue_enqueue(global.list, obj)
+                obj = instance_create(x-block_size, y+block_size, obj_light_block)
+                var bool = false;
+                with(obj){
+                    deleteEh = true
+                    reference_x = global.refx-1
+                    reference_y = global.refy+1
+                    light_level = parent_light/decay_rate
+                    bool = place_meeting(x,y,obj_wall)
+                }
+                if(!bool)
+                    ds_queue_enqueue(global.list, obj)
+                obj = instance_create(x+block_size, y-block_size, obj_light_block)
+                var bool = false;
+                with(obj){
+                    deleteEh = true
+                    reference_x = global.refx+1
+                    reference_y = global.refy-1
+                    light_level = parent_light/decay_rate
+                    bool = place_meeting(x,y,obj_wall)
+                }
+                if(!bool)
+                    ds_queue_enqueue(global.list, obj)
+                obj = instance_create(x+block_size, y+block_size, obj_light_block)
+                var bool = false;
+                with(obj){
+                    deleteEh = true
+                    reference_x = global.refx+1
+                    reference_y = global.refy+1
+                    light_level = parent_light/decay_rate
+                    bool = place_meeting(x,y,obj_wall)
+                }
+                if(!bool)
+                    ds_queue_enqueue(global.list, obj)
+                
+        }else{
+            instance_destroy(id)
+        }
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -821,7 +958,28 @@ if (player_state == player_states.death){
           <argument>
             <kind>1</kind>
             <string>do_lightning();
+ 
 </string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string></string>
           </argument>
         </arguments>
       </action>

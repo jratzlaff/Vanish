@@ -83,8 +83,8 @@ if(global.room_finished){
             <string>//Lighting
 surface_set_target(light);
 //HEX is BGR for god know's why
-draw_set_color($dddddd);
-//draw_rectangle(0, 0, view_wview, view_hview, false);
+draw_set_color($eeeeee);
+draw_rectangle(0, 0, view_wview, view_hview, false);
 surface_reset_target();
 
 

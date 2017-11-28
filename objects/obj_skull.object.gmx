@@ -33,6 +33,37 @@ rotation_speed = 25;
 dampening = .95;
 heading = random(360);
 randomize();
+aggro = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(aggro){
+    draw_set_blend_mode(bm_subtract);
+    surface_set_target(light);
+    draw_rectangle_color(x-4-view_xview,y-2-view_yview,x-2-view_xview,y-view_yview, c_red,c_red,c_red,c_red,false)
+    draw_rectangle_color(x+2-view_xview,y-2-view_yview,x+4-view_xview,y-view_yview, c_red,c_red,c_red,c_red,false)
+    surface_reset_target();
+    draw_set_blend_mode(bm_normal);
+}
 </string>
           </argument>
         </arguments>
@@ -62,6 +93,7 @@ if distance_to_object(obj_player) &lt; 150 {
     x_vel+= delx/(abs(delx)+abs(dely)) * move_speed;
     y_vel-= dely/(abs(delx)+abs(dely)) * move_speed;
     heading = radtodeg(point_direction(x,y,obj_player.x,obj_player.y));
+    aggro = true
     sprite_index = spr_skull_aggro;
     //speed = 2;
     if (obj_player.x &lt; x){
@@ -75,6 +107,7 @@ if distance_to_object(obj_player) &lt; 150 {
 }
 
 else {
+    aggro = false;
     sprite_index = spr_skull;
     image_speed = .2;
     speed = 0;

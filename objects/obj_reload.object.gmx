@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>room_goto(global.level_order[global.index]);
+            <string>//room_goto(global.level_order[global.index]);
+room_goto(random_room);
 </string>
           </argument>
         </arguments>

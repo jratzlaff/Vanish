@@ -52,7 +52,8 @@ gotoRoom     = menu;     //Set the room to goto when pressed
             <kind>1</kind>
             <string>//show_debug_message("Room: " + string(global.next_room))
 
-room_goto(gotoRoom);
+//room_goto(gotoRoom);
+room_goto(random_room);
 </string>
           </argument>
         </arguments>

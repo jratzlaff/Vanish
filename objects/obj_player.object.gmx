@@ -155,12 +155,14 @@ while(!ds_queue_empty(global.list)){
                 var parent_light = light_level
                 obj = instance_create(x-block_size, y, obj_light_block)
                 var bool = false;
+                var portal = false;
                 with(obj){
                     deleteEh = true
                     reference_x = global.refx-1
                     reference_y = global.refy
                     light_level = parent_light/decay_rate
                     bool = place_meeting(x,y,obj_wall)
+                    portal = portal || place_meeting(x,y, obj_portal_left) || place_meeting(x,y,obj_portal_right)
                 }
                 if(!bool)
                     ds_queue_enqueue(global.list, obj)
@@ -172,6 +174,7 @@ while(!ds_queue_empty(global.list)){
                     reference_y = global.refy
                     light_level = parent_light/decay_rate
                     bool = place_meeting(x,y,obj_wall)
+                    portal = portal || place_meeting(x,y, obj_portal_left) || place_meeting(x,y,obj_portal_right)
                 }
                 if(!bool)
                     ds_queue_enqueue(global.list, obj)
@@ -183,6 +186,7 @@ while(!ds_queue_empty(global.list)){
                     reference_y = global.refy-1
                     light_level = parent_light/decay_rate
                     bool = place_meeting(x,y,obj_wall)
+                    portal = portal || place_meeting(x,y, obj_portal_left) || place_meeting(x,y,obj_portal_right)
                 }
                 if(!bool)
                     ds_queue_enqueue(global.list, obj)
@@ -194,6 +198,7 @@ while(!ds_queue_empty(global.list)){
                     reference_y = global.refy+1
                     light_level = parent_light/decay_rate
                     bool = place_meeting(x,y,obj_wall)
+                    portal = portal || place_meeting(x,y, obj_portal_left) || place_meeting(x,y,obj_portal_right)
                 }
                 if(!bool)
                     ds_queue_enqueue(global.list, obj)
@@ -207,6 +212,7 @@ while(!ds_queue_empty(global.list)){
                     reference_y = global.refy-1
                     light_level = parent_light/decay_rate
                     bool = place_meeting(x,y,obj_wall)
+                    portal = portal || place_meeting(x,y, obj_portal_left) || place_meeting(x,y,obj_portal_right)
                 }
                 if(!bool)
                     ds_queue_enqueue(global.list, obj)
@@ -218,6 +224,7 @@ while(!ds_queue_empty(global.list)){
                     reference_y = global.refy+1
                     light_level = parent_light/decay_rate
                     bool = place_meeting(x,y,obj_wall)
+                    portal = portal || place_meeting(x,y, obj_portal_left) || place_meeting(x,y,obj_portal_right)
                 }
                 if(!bool)
                     ds_queue_enqueue(global.list, obj)
@@ -229,6 +236,7 @@ while(!ds_queue_empty(global.list)){
                     reference_y = global.refy-1
                     light_level = parent_light/decay_rate
                     bool = place_meeting(x,y,obj_wall)
+                    portal = portal || place_meeting(x,y, obj_portal_left) || place_meeting(x,y,obj_portal_right)
                 }
                 if(!bool)
                     ds_queue_enqueue(global.list, obj)
@@ -240,10 +248,37 @@ while(!ds_queue_empty(global.list)){
                     reference_y = global.refy+1
                     light_level = parent_light/decay_rate
                     bool = place_meeting(x,y,obj_wall)
+                    portal = portal || place_meeting(x,y, obj_portal_left) || place_meeting(x,y,obj_portal_right)
                 }
                 if(!bool)
                     ds_queue_enqueue(global.list, obj)
-                
+                if(portal){
+                    var newx, newy
+                    with(obj_portal_left){
+                        newx = x
+                        newy = y
+                    }
+                    obj = instance_create(newx,newy, obj_light_block)
+                    with(obj){
+                        deleteEh = true
+                        reference_x = global.refx+1
+                        reference_y = global.refy+1
+                        light_level = parent_light/decay_rate
+                    }
+                    ds_queue_enqueue(global.list, obj)
+                    with(obj_portal_right){
+                        newx = x
+                        newy = y
+                    }
+                    obj = instance_create(newx,newy, obj_light_block)
+                    with(obj){
+                        deleteEh = true
+                        reference_x = global.refx+1
+                        reference_y = global.refy+1
+                        light_level = parent_light/decay_rate
+                    }
+                    ds_queue_enqueue(global.list, obj)
+                }           
         }else{
             instance_destroy(id)
         }
